@@ -29,7 +29,13 @@ jobs:
       - name: Show Flutter version
         run: flutter --version
 
-      - name: Regenerate Android files
+      - name: Clean Flutter
+        run: flutter clean
+
+      - name: Remove old Android files
+        run: rm -rf android
+
+      - name: Create fresh Android files
         run: flutter create . --platforms=android --project-name leather_app
 
       - name: Get dependencies

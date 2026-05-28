@@ -14,11 +14,23 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v4
 
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.5'
-          channel: 'stable'
+          channel: stable
+          cache: true
+
+      - name: Show Flutter version
+        run: flutter --version
+
+      - name: Regenerate Android files
+        run: flutter create . --platforms=android --project-name leather_app
 
       - name: Get dependencies
         run: flutter pub get
